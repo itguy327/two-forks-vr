@@ -11,7 +11,6 @@ namespace TwoForksVr.Climbing
 		private CharacterController characterController;
 		private VrClimbing otherHand;
 		private Vector3? grabPosition;
-	    private Transform attatchedTransform;
 	    private SteamVR_Input_Sources inputSource;
 
 	    public static VrClimbing Create(VrHand hand)
@@ -43,12 +42,12 @@ namespace TwoForksVr.Climbing
 		
 		private void UpdatePlayerPosition()
 	    {
-	        if (grabPosition == null || attatchedTransform == null || playerTransform == null)
+	        if (grabPosition == null || playerTransform == null)
 	        {
 	            return;
 	        }
 
-	        playerTransform.position += attatchedTransform.TransformPoint((Vector3) (grabPosition)) - transform.position;
+	        playerTransform.position += (Vector3) grabPosition - transform.position;
 	    }
 		
 	    private void OnTriggerStay(Collider otherCollider)
@@ -56,12 +55,11 @@ namespace TwoForksVr.Climbing
 	        if (otherCollider.isTrigger) return;
 
 
-	        if (grabPosition != null || !IsPressingClimb() || IsOtherHandGrabbing() || !IsRockClimb(otherCollider)) return;
+	        if (grabPosition != null || !IsPressingClimb() || !IsRockClimb(otherCollider)) return;
 
 	        Logs.LogInfo($"########### holding on to dear life to ${otherCollider.name}");
 	        
-	        attatchedTransform = otherCollider.transform;
-	        grabPosition = attatchedTransform.InverseTransformPoint(transform.position);
+	        grabPosition = transform.position;
 	        if (characterController)
 	        {
 		        characterController.enabled = false;
@@ -77,7 +75,6 @@ namespace TwoForksVr.Climbing
 	    {
 	        if (!IsPressingClimb())
 	        {
-		        Logs.LogInfo("Release");
 	            Release();
 	        }
 	    }
@@ -99,6 +96,11 @@ namespace TwoForksVr.Climbing
 	    private bool IsPressingClimb()
 	    {
 		    return SteamVR_Actions.default_Grip.GetState(inputSource);
+	    }
+
+	    private bool JustPressedClimb()
+	    {
+		    return SteamVR_Actions.default_Grip.GetStateDown(inputSource);
 	    }
     }
 }
