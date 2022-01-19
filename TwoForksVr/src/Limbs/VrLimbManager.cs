@@ -1,4 +1,5 @@
-﻿using TwoForksVr.LaserPointer;
+﻿using TwoForksVr.Climbing;
+using TwoForksVr.LaserPointer;
 using TwoForksVr.Stage;
 using TwoForksVr.Tools;
 using TwoForksVr.UI.Patches;
@@ -12,6 +13,8 @@ namespace TwoForksVr.Limbs
         private Laser laser;
         private VrHand leftHand;
         private VrHand rightHand;
+        private VrClimbing leftClimbingController;
+        private VrClimbing rightClimbingController;
 
         public static VrLimbManager Create(VrStage stage)
         {
@@ -20,7 +23,11 @@ namespace TwoForksVr.Limbs
             instanceTransform.SetParent(stage.transform, false);
             
             instance.rightHand = VrHand.Create(instanceTransform);
+            instance.rightClimbingController = VrClimbing.Create(instance.rightHand);
+
             instance.leftHand = VrHand.Create(instanceTransform, true);
+            instance.leftClimbingController = VrClimbing.Create(instance.leftHand);
+            
             ToolPicker.Create(
                 instanceTransform,
                 instance.leftHand.transform,
@@ -43,6 +50,9 @@ namespace TwoForksVr.Limbs
             rightHand.SetUp(skeletonRoot, armsMaterial);
             leftHand.SetUp(skeletonRoot, armsMaterial);
             laser.SetUp(camera);
+            
+            rightClimbingController.SetUp(playerTransform, leftClimbingController);
+            leftClimbingController.SetUp(playerTransform, rightClimbingController);
 
             VrFoot.Create(skeletonRoot);
             VrFoot.Create(skeletonRoot, true);
