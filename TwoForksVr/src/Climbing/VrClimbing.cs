@@ -12,6 +12,7 @@ namespace TwoForksVr.Climbing
 		private VrClimbing otherHand;
 		private Vector3? grabPosition;
 	    private SteamVR_Input_Sources inputSource;
+	    private bool ignoreInputs;
 
 	    public static VrClimbing Create(VrHand hand)
 	    {
@@ -55,7 +56,9 @@ namespace TwoForksVr.Climbing
 	        if (otherCollider.isTrigger) return;
 
 
-	        if (grabPosition != null || !IsPressingClimb() || !IsRockClimb(otherCollider)) return;
+	        if (ignoreInputs || grabPosition != null || !IsPressingClimb() || !IsRockClimb(otherCollider)) return;
+	        
+	        otherHand.Release(true);
 
 	        Logs.LogInfo($"########### holding on to dear life to ${otherCollider.name}");
 	        
@@ -84,8 +87,9 @@ namespace TwoForksVr.Climbing
 		    return otherHand && otherHand.grabPosition != null;
 	    }
 	    
-	    private void Release()
+	    private void Release(bool ignoreFutureInputs = false)
 	    {
+		    ignoreInputs = ignoreFutureInputs;
 		    grabPosition = null;
 		    if (characterController && !IsOtherHandGrabbing())
 		    {
@@ -96,11 +100,6 @@ namespace TwoForksVr.Climbing
 	    private bool IsPressingClimb()
 	    {
 		    return SteamVR_Actions.default_Grip.GetState(inputSource);
-	    }
-
-	    private bool JustPressedClimb()
-	    {
-		    return SteamVR_Actions.default_Grip.GetStateDown(inputSource);
 	    }
     }
 }
