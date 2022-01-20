@@ -39,11 +39,11 @@ namespace TwoForksVr.VrInput.Patches
                 {InputName.Pause, actionSet.Cancel},
                 {InputName.NextMenu, actionSet.NextPage},
                 {InputName.PreviousMenu, actionSet.PreviousPage},
-                {InputName.RadioUp, actionSet.Grip}
+                // {InputName.RadioUp, actionSet.Grip}
             };
             InvertedBooleanActionMap = new Dictionary<string, SteamVR_Action_Boolean>
             {
-                {InputName.RadioDown, actionSet.Grip}
+                // {InputName.RadioDown, actionSet.Grip}
             };
             Vector2XActionMap = new Dictionary<string, SteamVR_Action_Vector2>
             {

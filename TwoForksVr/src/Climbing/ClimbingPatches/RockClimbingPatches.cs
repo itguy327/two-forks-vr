@@ -9,9 +9,12 @@ namespace TwoForksVr.Climbing.ClimbingPatches
     public static class RockClimbingPatches
     {
         [HarmonyPrefix]
-        [HarmonyPatch(typeof(vgBaseMoveEdge), nameof(vgBaseMoveEdge.Start))]
-        public static void SetUpRockClimbing(vgBaseMoveEdge __instance)
+        [HarmonyPatch(typeof(vgRockClimbEdge), nameof(vgRockClimbEdge.InitializeEdgeType))]
+        public static void SetUpRockClimbing(vgRockClimbEdge __instance)
         {
+            // TODO is edge needed? or do this some other way?
+            __instance.enabled = false;
+            __instance.edge = null;
             Logs.LogInfo($"#### Found vgBaseMoveEdge");
             // var colliders = __instance.transform.parent.GetComponentsInChildren<Collider>();
             // var firstActiveCollider = colliders.First(collider => collider.enabled);
