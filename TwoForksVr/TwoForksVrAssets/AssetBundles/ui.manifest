@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1798297119
+CRC: 3186350735
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a855a0d40f6f7fefe245e1e5f1d5ac5d
+    Hash: 71c04aac345193446361d16003227f6d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 30a26e28640c789a69d83092cccef46a
@@ -66,6 +66,7 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/Texture2D/facebutton_spritesheet.png
 - Assets/Shader/TMPro_Mobile.cginc
 - Assets/Shader/TMP_SDF-Mobile.shader
 - Assets/Prefabs/vr-settings-menu.prefab
