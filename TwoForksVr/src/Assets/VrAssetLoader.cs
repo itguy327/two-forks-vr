@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using TwoForksVr.Helpers;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace TwoForksVr.Assets
     public static class VrAssetLoader
     {
         private const string assetsDir = "/BepInEx/plugins/TwoForksVrAssets/AssetBundles/";
+
+        public static Dictionary<string, Shader> livShaders = new Dictionary<string, Shader>();
         public static GameObject ToolPickerPrefab { get; private set; }
         public static Shader TMProShader { get; private set; }
         public static Shader FadeShader { get; private set; }
@@ -33,6 +36,13 @@ namespace TwoForksVr.Assets
             TeleportTargetPrefab = uiBundle.LoadAsset<GameObject>("teleport-target");
             TMProShader = uiBundle.LoadAsset<Shader>("TMP_SDF-Mobile");
             FadeShader = uiBundle.LoadAsset<Shader>("SteamVR_Fade");
+
+            var shadersBundle = LoadBundle("shaders");
+            foreach (var shader in shadersBundle.LoadAllAssets<Shader>())
+            {
+                Logs.LogInfo($"### Loading LIV shader: {shader.name}");
+                livShaders[shader.name] = shader;
+            }
         }
 
         private static AssetBundle LoadBundle(string assetName)
