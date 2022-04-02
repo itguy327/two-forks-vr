@@ -40,13 +40,6 @@ namespace TwoForksVr.Limbs
             DominantHand.SetUp(skeletonRoot, armsMaterial);
             NonDominantHand.SetUp(skeletonRoot, armsMaterial);
 
-            gameObject.SetActive(false);
-            var existingLiv = gameObject.GetComponent<LIV.SDK.Unity.LIV>();
-            if (existingLiv) Destroy(existingLiv);
-            var liv = gameObject.AddComponent<LIV.SDK.Unity.LIV>();
-            liv.HMDCamera = camera;
-            liv.stage = transform;
-            gameObject.SetActive(true);
 
             Laser.SetUp(camera);
             UpdateHandedness();
@@ -55,6 +48,17 @@ namespace TwoForksVr.Limbs
         private void Update()
         {
             UpdateHandedness();
+
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                gameObject.SetActive(false);
+                var existingLiv = gameObject.GetComponent<LIV.SDK.Unity.LIV>();
+                if (existingLiv) Destroy(existingLiv);
+                var liv = gameObject.AddComponent<LIV.SDK.Unity.LIV>();
+                liv.HMDCamera = Camera.main;
+                liv.stage = transform;
+                gameObject.SetActive(true);
+            }
         }
 
         private void OnEnable()
