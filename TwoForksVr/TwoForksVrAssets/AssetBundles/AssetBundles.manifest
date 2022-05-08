@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 689105080
+CRC: 3563030987
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,4 +7,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: ui
+      Dependencies: {}
+    Info_2:
+      Name: liv-shaders
       Dependencies: {}
