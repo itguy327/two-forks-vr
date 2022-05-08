@@ -10,9 +10,11 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <Configurations>Release;Debug</Configurations>
         <Platforms>x64</Platforms>
+        <UnityAssemblyBuildConfig>-p:DebugSymbols="false" -p:DebugType="None" -p:Optimize="true" -p:Configuration="Release" -p:DefineConstants="UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_40;UNITY_2017_4;UNITY_2017;PLATFORM_ARCH_64;UNITY_64</UnityAssemblyBuildConfig>
         <PreBuildEvent>
-            "$(MSBuildBinPath)\MSBuild.exe" "$(SolutionDir)\UnityHelper\SteamVR.csproj" -p:DebugSymbols="false" -p:DebugType="None" -p:Optimize="true" -p:Configuration="Release" -p:DefineConstants="UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_40;UNITY_2017_4;UNITY_2017;PLATFORM_ARCH_64;UNITY_64"
-            "$(MSBuildBinPath)\MSBuild.exe" "$(SolutionDir)\UnityHelper\SteamVR_Actions.csproj" -p:DebugSymbols="false" -p:DebugType="None" -p:Optimize="true" -p:Configuration="Release" -p:DefineConstants="UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_40;UNITY_2017_4;UNITY_2017;PLATFORM_ARCH_64;UNITY_64"
+            "$(MSBuildBinPath)\MSBuild.exe" "$(SolutionDir)\UnityHelper\SteamVR.csproj" $(UnityAssemblyBuildConfig)"
+            "$(MSBuildBinPath)\MSBuild.exe" "$(SolutionDir)\UnityHelper\SteamVR_Actions.csproj" $(UnityAssemblyBuildConfig)"
+            "$(MSBuildBinPath)\MSBuild.exe" "$(SolutionDir)\UnityHelper\LIV.csproj" $(UnityAssemblyBuildConfig)"
             xcopy /Y /S "$(SolutionDir)UnityHelper\Assets\StreamingAssets\SteamVR\*.json" "$(SolutionDir)TwoForksVr\TwoForksVrAssets\Bindings\*.json"
         </PreBuildEvent>
         <LangVersion>default</LangVersion>
@@ -34,6 +36,9 @@
         </Reference>
         <Reference Include="SteamVR_Actions">
             <HintPath>..\UnityHelper\obj\Release\SteamVR_Actions.dll</HintPath>
+        </Reference>
+        <Reference Include="LIV">
+            <HintPath>..\UnityHelper\obj\Release\LIV.dll</HintPath>
         </Reference>
         <Reference Include="SteamVR_Actions">
             <HintPath>..\UnityHelper\Assets\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll</HintPath>

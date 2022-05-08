@@ -6,15 +6,15 @@
         <OutputPath>bin\$(Configuration)\</OutputPath>
         <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <PostBuildEvent>
-            xcopy /Y /S "$(SolutionDir)TwoForksVr\bin\x64\Release\**" "$(SolutionDir)TwoForksVrInstaller\bin\Release\ModFiles\BepInEx\plugins\"
-        </PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DebugType>full</DebugType>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugType>none</DebugType>
+        <PostBuildEvent>
+            xcopy /Y /S "$(SolutionDir)TwoForksVr\bin\x64\Release\**" "$(SolutionDir)TwoForksVrInstaller\bin\Release\ModFiles\BepInEx\plugins\"
+        </PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="AssetsTools.NET">
