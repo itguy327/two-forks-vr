@@ -46,6 +46,17 @@ public class VrLimbManager : MonoBehaviour
     private void Update()
     {
         UpdateHandedness();
+        
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            var livObject = new GameObject("LIV");
+            livObject.SetActive(false);
+            var liv = livObject.AddComponent<LIV.SDK.Unity.LIV>();
+            liv.HMDCamera = Camera.main;
+            liv.stage = transform;
+            liv.fixPostEffectsAlpha = true;
+            livObject.SetActive(true);
+        }
     }
 
     private void OnEnable()

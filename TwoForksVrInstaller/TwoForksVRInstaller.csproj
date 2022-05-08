@@ -22,6 +22,10 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Content Include="..\UnityHelper\Assets\LIV\Plugins\x64\LIV_Bridge.dll">
+          <Link>ModFiles\Firewatch_Data\Plugins\LIV_Bridge.dll</Link>
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Content Include="ModFiles/**">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>

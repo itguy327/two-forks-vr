@@ -1,8 +1,13 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using BepInEx;
 using HarmonyLib;
+using LIV.SDK.Unity;
 using TwoForksVr.Assets;
+using TwoForksVr.Helpers;
 using TwoForksVr.Settings;
+using TwoForksVr.Stage;
+using UnityEngine;
 using Valve.VR;
 
 namespace TwoForksVr;
@@ -15,6 +20,9 @@ public class TwoForksVrMod : BaseUnityPlugin
         VrSettings.SetUp(Config);
         Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
         VrAssetLoader.LoadAssets();
+        
+        Logs.WriteInfo($"shader is loaded {VrAssetLoader.LivShadersBundle}");
+        SDKShaders.LoadFromAssetBundle(VrAssetLoader.LivShadersBundle);
         InitSteamVR();
     }
 

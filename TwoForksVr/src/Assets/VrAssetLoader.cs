@@ -17,6 +17,7 @@ public static class VrAssetLoader
     public static Material HenryBodyMaterial { get; private set; }
     public static Material HenryArmsMaterial { get; private set; }
     public static Material HenryBackpackMaterial { get; private set; }
+    public static AssetBundle LivShadersBundle { get; private set; }
 
     public static void LoadAssets()
     {
@@ -33,6 +34,8 @@ public static class VrAssetLoader
         TeleportTargetPrefab = uiBundle.LoadAsset<GameObject>("teleport-target");
         TMProShader = uiBundle.LoadAsset<Shader>("TMP_SDF-Mobile");
         FadeShader = uiBundle.LoadAsset<Shader>("SteamVR_Fade");
+
+        LivShadersBundle = LoadBundle("liv-shaders");
     }
 
     private static AssetBundle LoadBundle(string assetName)
