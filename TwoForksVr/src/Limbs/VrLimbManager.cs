@@ -1,4 +1,5 @@
 ﻿using System;
+using TwoForksVr.Helpers;
 using TwoForksVr.LaserPointer;
 using TwoForksVr.Settings;
 using TwoForksVr.Stage;
@@ -49,16 +50,39 @@ namespace TwoForksVr.Limbs
         private void Update()
         {
             UpdateHandedness();
+            if (liv)
+            {
+                liv.spectatorLayerMask = liv.HMDCamera.cullingMask;
+                var livCamera = liv.render.cameraInstance;
+                livCamera.clearFlags = liv.HMDCamera.clearFlags;
+                livCamera.backgroundColor = liv.HMDCamera.backgroundColor;
+            }
         }
 
+        private LIV.SDK.Unity.LIV liv;
+        
         private void SetUpLiv(Camera camera)
         {
             gameObject.SetActive(false);
             var existingLiv = gameObject.GetComponent<LIV.SDK.Unity.LIV>();
             if (existingLiv) Destroy(existingLiv);
-            var liv = gameObject.AddComponent<LIV.SDK.Unity.LIV>();
+            liv = gameObject.AddComponent<LIV.SDK.Unity.LIV>();
             liv.HMDCamera = camera;
             liv.stage = transform;
+            // liv.spectatorLayerMask = camera.cullingMask;
+            liv.spectatorLayerMask = LayerHelper.GetMask(
+                GameLayer.Default,
+                GameLayer.Terrain,
+                GameLayer.Water,
+                GameLayer.DynamicObjects,
+                GameLayer.IgnoreRaycast,
+                GameLayer.MenuBackground,
+                GameLayer.PutBack,
+                GameLayer.RaycastOnly,
+                GameLayer.StopsPlayer,
+                GameLayer.PhysicsHackCollision,
+                GameLayer.RopeClimbCollision,
+                GameLayer.TransparentFX);
             gameObject.SetActive(true);
         }
 
