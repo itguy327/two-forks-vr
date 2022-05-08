@@ -56,11 +56,13 @@ namespace LIV.SDK.Unity
                         ForceForwardRendering != null;
 
                     if (!state)
-                        Debug.LogError($"Failed to retreive at least one of the LIV shaders from {bundle.name}");
+                        Debug.LogError(string.Format("Failed to retreive at least one of the LIV shaders from {0}",
+                            bundle.name));
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"Failed to initialize the ShaderCache from asset bundle {bundle.name} : {e}");
+                    Debug.LogError(string.Format("Failed to initialize the ShaderCache from asset bundle {0} : {1}",
+                        bundle.name, e));
                     state = false;
                 }
             }

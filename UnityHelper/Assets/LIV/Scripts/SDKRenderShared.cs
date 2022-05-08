@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections;
 
@@ -494,10 +495,10 @@ namespace LIV.SDK.Unity
             string frameCount = Time.frameCount.ToString();
 
             System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(Time.realtimeSinceStartup);
-            string timeStamp = string.Format($"{timeSpan.Hours:00}:{timeSpan.Minutes:00}:{timeSpan.Seconds:00}:{timeSpan.Milliseconds:000}");
+            string timeStamp = string.Format("{0:00}:{1:00}:{2:00}:{3:000}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
             _sdkFont.SetText(0, 0, frameCount);
             _sdkFont.SetText(width - frameCount.Length, 0, frameCount);
-            _sdkFont.SetText(0, height - 1, $"{frameCount} {timeStamp}");
+            _sdkFont.SetText(0, height - 1, string.Format("{0} {1}", frameCount, timeStamp));
             _sdkFont.SetText(width - frameCount.Length, height - 1, frameCount);
             _sdkFont.Apply();
 
